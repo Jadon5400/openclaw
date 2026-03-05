@@ -84,6 +84,15 @@
             background: #e9ecef;
         }
 
+        .hotspot-image {
+            width: 200px;
+            height: 150px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #f0f0f0;
+        }
+
         .hotspot-number {
             flex-shrink: 0;
             width: 40px;
@@ -100,19 +109,22 @@
 
         .hotspot-content {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .hotspot-title {
             color: #2c3e50;
             font-size: 1.2em;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             line-height: 1.4;
         }
 
         .hotspot-meta {
             display: flex;
             gap: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             color: #7f8c8d;
             font-size: 0.9em;
         }
@@ -120,7 +132,7 @@
         .hotspot-source {
             display: flex;
             align-items: center;
-            gap:5px;
+            gap: 5px;
         }
 
         .hotspot-views {
@@ -138,6 +150,7 @@
             border: 2px solid #667eea;
             border-radius: 20px;
             transition: all 0.3s ease;
+            align-self: flex-start;
         }
 
         .hotspot-link:hover {
@@ -161,8 +174,15 @@
                 flex-direction: column;
             }
 
+            .hotspot-image {
+                width: 100%;
+                height: 200px;
+            }
+
             .hotspot-number {
-                align-self: flex-start;
+                position: absolute;
+                top: 10px;
+                left: 10px;
             }
         }
     </style>
@@ -177,116 +197,62 @@
         <div id="content">
         <div class="category-section">
             <div class="category-header">
-                <h2 class="category-title">📌 今日政事热点</h2>
-                <div class="category-count">共 2 条热点</div>
-            </div>
-                <div class="hotspot-card">
-                    <div class="hotspot-number">1</div>
-                    <div class="hotspot-content">
-                        <div class="hotspot-title">优化政务服务 利企便民为民(新思想引领新时代改革开放)</div>
-                        <div class="hotspot-meta">
-                            <div class="hotspot-source">📄 中国新闻网</div>
-                            <div class="hotspot-views">🔥 1000 热度</div>
-                        </div>
-                        <a href="https://www.chinanews.com/gn/2024/07-14/10251209.shtml" target="_blank" class="hotspot-link">查看详情 →</a>
-                    </div>
-                </div>
-                <div class="hotspot-card">
-                    <div class="hotspot-number">2</div>
-                    <div class="hotspot-content">
-                        <div class="hotspot-title">政务的解释|政务的意思|汉典“政务”词语的解释</div>
-                        <div class="hotspot-meta">
-                            <div class="hotspot-source">📄 漢典</div>
-                            <div class="hotspot-views">🔥 2000 热度</div>
-                        </div>
-                        <a href="https://www.zdic.net/hans/%E6%94%BF%E5%8A%A1" target="_blank" class="hotspot-link">查看详情 →</a>
-                    </div>
-                </div>
-        </div>
-
-        <div class="category-section">
-            <div class="category-header">
-                <h2 class="category-title">🤖 今日AI科技热点</h2>
-                <div class="category-count">共 2 条热点</div>
-            </div>
-                <div class="hotspot-card">
-                    <div class="hotspot-number">1</div>
-                    <div class="hotspot-content">
-                        <div class="hotspot-title">我科學家為人工智能打造“通用大腦”</div>
-                        <div class="hotspot-meta">
-                            <div class="hotspot-source">📄 人民网</div>
-                            <div class="hotspot-views">🔥 1000 热度</div>
-                        </div>
-                        <a href="http://edu.people.com.cn/BIG5/n1/2026/0210/c1006-40663066.html" target="_blank" class="hotspot-link">查看详情 →</a>
-                    </div>
-                </div>
-                <div class="hotspot-card">
-                    <div class="hotspot-number">2</div>
-                    <div class="hotspot-content">
-                        <div class="hotspot-title">人工智能，从深度学习到全面赋能（科技前沿）</div>
-                        <div class="hotspot-meta">
-                            <div class="hotspot-source">📄 人民网四川频道</div>
-                            <div class="hotspot-views">🔥 2000 热度</div>
-                        </div>
-                        <a href="http://sc.people.com.cn/n2/2025/0226/c345167-41146785.html" target="_blank" class="hotspot-link">查看详情 →</a>
-                    </div>
-                </div>
-        </div>
-
-        <div class="category-section">
-            <div class="category-header">
-                <h2 class="category-title">🎭 今日娱乐新闻热点</h2>
-                <div class="category-count">共 2 条热点</div>
-            </div>
-                <div class="hotspot-card">
-                    <div class="hotspot-number">1</div>
-                    <div class="hotspot-content">
-                        <div class="hotspot-title">许凯白鹿王星越荣登2025央视春晚 欢娱影视以生态拓展演员成长版图</div>
-                        <div class="hotspot-meta">
-                            <div class="hotspot-source">📄 今日头条</div>
-                            <div class="hotspot-views">🔥 1000 热度</div>
-                        </div>
-                        <a href="http://m.toutiao.com/group/7466641832336704052/?upstream_biz=VolcEngine" target="_blank" class="hotspot-link">查看详情 →</a>
-                    </div>
-                </div>
-                <div class="hotspot-card">
-                    <div class="hotspot-number">2</div>
-                    <div class="hotspot-content">
-                        <div class="hotspot-title">娱乐圈女星排名，刘亦菲第三，热巴第十，第一名竟然是她!</div>
-                        <div class="hotspot-meta">
-                            <div class="hotspot-source">📄 360娱乐</div>
-                            <div class="hotspot-views">🔥 2000 热度</div>
-                        </div>
-                        <a href="https://m.yule.360.com/content/4713697" target="_blank" class="hotspot-link">查看详情 →</a>
-                    </div>
-                </div>
-        </div>
-
-        <div class="category-section">
-            <div class="category-header">
                 <h2 class="category-title">🎬 今日爆款视频热点</h2>
-                <div class="category-count">共 2 条热点</div>
+                <div class="category-count">共 5 条热点</div>
             </div>
                 <div class="hotspot-card">
-                    <div class="hotspot-number">1</div>
+                    <img src="https://p11-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/e9df55ee6d404de886f0d8c39c01b30f~tplv-obj.jpeg?lk3s=1515c32d&scene=volc_search&x-expires=1780466973&x-signature=dBVvCUqqrBL80uFcU5Nt5gbNVmY%3D" alt="抖音是一款主要用户为一,二线城市,95后年轻人群的音乐短视频app,这" class="hotspot-image">
                     <div class="hotspot-content">
-                        <div class="hotspot-title">2025年B站头部UP主视频去哪儿看?抖音精选藏尽深度干货</div>
+                        <div class="hotspot-title">抖音是一款主要用户为一,二线城市,95后年轻人群的音乐短视频app,这</div>
                         <div class="hotspot-meta">
-                            <div class="hotspot-source">📄 搜狐</div>
-                            <div class="hotspot-views">🔥 1000 热度</div>
+                            <div class="hotspot-source">📄 未知来源</div>
+                            <div class="hotspot-views">🔥 6806 热度</div>
                         </div>
-                        <a href="https://news.sohu.com/a/984594303_122633989" target="_blank" class="hotspot-link">查看详情 →</a>
+                        <a href="http://www.looktmt.com/0027/390/25570642825.html" target="_blank" class="hotspot-link">查看详情 →</a>
                     </div>
                 </div>
                 <div class="hotspot-card">
-                    <div class="hotspot-number">2</div>
+                    <img src="https://p11-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/66a503e809f047f99c7693ea869eac01~tplv-obj.jpeg?lk3s=1515c32d&scene=volc_search&x-expires=1780466973&x-signature=jQUKRVBRkr%2F886KMVD98rm0TZD0%3D" alt="作为目前最火的短视频投放平台,抖音吸引了众多内容创业者,新媒体" class="hotspot-image">
                     <div class="hotspot-content">
-                        <div class="hotspot-title">2025年UP主合集去哪儿看?四大平台全攻略，首选抖音精选!</div>
+                        <div class="hotspot-title">作为目前最火的短视频投放平台,抖音吸引了众多内容创业者,新媒体</div>
                         <div class="hotspot-meta">
-                            <div class="hotspot-source">📄 搜狐</div>
-                            <div class="hotspot-views">🔥 2000 热度</div>
+                            <div class="hotspot-source">📄 未知来源</div>
+                            <div class="hotspot-views">🔥 6425 热度</div>
                         </div>
-                        <a href="https://news.sohu.com/a/983539006_122633965" target="_blank" class="hotspot-link">查看详情 →</a>
+                        <a href="http://www.sohu.com/a/252998123_471875" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p11-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/604009a6e50648e2b0459aa3f8dc47d0~tplv-obj.jpeg?lk3s=1515c32d&scene=volc_search&x-expires=1780466973&x-signature=gkc9koWKivp78QgKLPt5VCoNq3g%3D" alt="抖音是一个关于美好的短视频app" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">抖音是一个关于美好的短视频app</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 未知来源</div>
+                            <div class="hotspot-views">🔥 6386 热度</div>
+                        </div>
+                        <a href="http://www.sohu.com/a/287471107_100056999" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p26-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/226f13a31009495883c933f88557db0d~tplv-obj.jpeg?lk3s=1515c32d&scene=volc_search&x-expires=1780466973&x-signature=8rAiMlrR9VJXoYEDtdECf0Fqa3A%3D" alt="字节跳动:旗下产品全球总月活超15亿近一半在抖音" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">字节跳动:旗下产品全球总月活超15亿近一半在抖音</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 未知来源</div>
+                            <div class="hotspot-views">🔥 6372 热度</div>
+                        </div>
+                        <a href="https://www.cnmo.com/tags/2w7h7u/" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p26-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/37a8f5777e4d403aad6c64b04bb1e3aa~tplv-obj.jpeg?lk3s=1515c32d&scene=volc_search&x-expires=1780466973&x-signature=ED4ILh4WNCZbgo%2BWRVVC2YbtmOI%3D" alt="字节跳动旗下抖音app" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">字节跳动旗下抖音app</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 未知来源</div>
+                            <div class="hotspot-views">🔥 5488 热度</div>
+                        </div>
+                        <a href="http://news.pconline.com.cn/1208/12087229.html" target="_blank" class="hotspot-link">查看详情 →</a>
                     </div>
                 </div>
         </div>
