@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📰 每日分类热点</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header .meta {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .category-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .category-title {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .category-count {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .hotspot-card {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hotspot-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background: #e9ecef;
+        }
+
+        .hotspot-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .hotspot-content {
+            flex: 1;
+        }
+
+        .hotspot-title {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .hotspot-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .hotspot-source {
+            display: flex;
+            align-items: center;
+            gap:5px;
+        }
+
+        .hotspot-views {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hotspot-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 6px 15px;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .hotspot-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hotspot-card {
+                flex-direction: column;
+            }
+
+            .hotspot-number {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📰 每日分类热点</h1>
+            <div class="meta" id="date-meta"></div>
+            <div class="meta">数据来源：新浪微博 + 腾讯新闻 + AI智能提炼</div>
+        </div>
+        <div id="content">
+        <div class="category-section">
+            <div class="category-header">
+                <h2 class="category-title">📌 今日政事热点</h2>
+                <div class="category-count">共 2 条热点</div>
+            </div>
+                <div class="hotspot-card">
+                    <div class="hotspot-number">1</div>
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">优化政务服务 利企便民为民(新思想引领新时代改革开放)</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 中国新闻网</div>
+                            <div class="hotspot-views">🔥 1000 热度</div>
+                        </div>
+                        <a href="https://www.chinanews.com/gn/2024/07-14/10251209.shtml" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <div class="hotspot-number">2</div>
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">政务的解释|政务的意思|汉典“政务”词语的解释</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 漢典</div>
+                            <div class="hotspot-views">🔥 2000 热度</div>
+                        </div>
+                        <a href="https://www.zdic.net/hans/%E6%94%BF%E5%8A%A1" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <h2 class="category-title">🤖 今日AI科技热点</h2>
+                <div class="category-count">共 2 条热点</div>
+            </div>
+                <div class="hotspot-card">
+                    <div class="hotspot-number">1</div>
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">我科學家為人工智能打造“通用大腦”</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 人民网</div>
+                            <div class="hotspot-views">🔥 1000 热度</div>
+                        </div>
+                        <a href="http://edu.people.com.cn/BIG5/n1/2026/0210/c1006-40663066.html" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <div class="hotspot-number">2</div>
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">人工智能，从深度学习到全面赋能（科技前沿）</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 人民网四川频道</div>
+                            <div class="hotspot-views">🔥 2000 热度</div>
+                        </div>
+                        <a href="http://sc.people.com.cn/n2/2025/0226/c345167-41146785.html" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <h2 class="category-title">🎭 今日娱乐新闻热点</h2>
+                <div class="category-count">共 2 条热点</div>
+            </div>
+                <div class="hotspot-card">
+                    <div class="hotspot-number">1</div>
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">许凯白鹿王星越荣登2025央视春晚 欢娱影视以生态拓展演员成长版图</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 今日头条</div>
+                            <div class="hotspot-views">🔥 1000 热度</div>
+                        </div>
+                        <a href="http://m.toutiao.com/group/7466641832336704052/?upstream_biz=VolcEngine" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <div class="hotspot-number">2</div>
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">娱乐圈女星排名，刘亦菲第三，热巴第十，第一名竟然是她!</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 360娱乐</div>
+                            <div class="hotspot-views">🔥 2000 热度</div>
+                        </div>
+                        <a href="https://m.yule.360.com/content/4713697" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <h2 class="category-title">🎬 今日爆款视频热点</h2>
+                <div class="category-count">共 2 条热点</div>
+            </div>
+                <div class="hotspot-card">
+                    <div class="hotspot-number">1</div>
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">2025年B站头部UP主视频去哪儿看?抖音精选藏尽深度干货</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 搜狐</div>
+                            <div class="hotspot-views">🔥 1000 热度</div>
+                        </div>
+                        <a href="https://news.sohu.com/a/984594303_122633989" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <div class="hotspot-number">2</div>
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">2025年UP主合集去哪儿看?四大平台全攻略，首选抖音精选!</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 搜狐</div>
+                            <div class="hotspot-views">🔥 2000 热度</div>
+                        </div>
+                        <a href="https://news.sohu.com/a/983539006_122633965" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+        <div class="footer">
+            <p>🍡 <strong>鱼丸小结：</strong>以上为今日分类热点精选，欲了解详情可查看完整报道</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">本内容由AI自动生成，仅供参考</p>
+        </div>
+    </div>
+    <script>
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+        document.getElementById('date-meta').textContent = today.toLocaleDateString('zh-CN', options);
+    </script>
+</body>
+</html>
