@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📰 每日分类热点</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header .meta {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .category-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .category-title {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .category-count {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .hotspot-card {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hotspot-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background: #e9ecef;
+        }
+
+        .hotspot-image {
+            width: 200px;
+            height: 150px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #f0f0f0;
+        }
+
+        .hotspot-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .hotspot-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .hotspot-title {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .hotspot-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 5px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .hotspot-source {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hotspot-views {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hotspot-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 6px 15px;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .hotspot-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hotspot-card {
+                flex-direction: column;
+            }
+
+            .hotspot-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .hotspot-number {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📰 每日分类热点</h1>
+            <div class="meta" id="date-meta"></div>
+            <div class="meta">数据来源：新浪微博 + 腾讯新闻 + AI智能提炼</div>
+        </div>
+        <div id="content">
+        <div class="category-section">
+            <div class="category-header">
+                <h2 class="category-title">🏛️ 今日社会热点</h2>
+                <div class="category-count">共 5 条热点</div>
+            </div>
+                <div class="hotspot-card">
+                    <img src="https://p11-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/0b251fb5422f456aa551b8eae96fb62d~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765636&x-signature=nA1RKKsVGodJ99uIDUVszh29QPc%3D" alt="建议春节9天假代表收到很多祝贺" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">建议春节9天假代表收到很多祝贺</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 877599 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=建议春节9天假代表收到很多祝贺" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p11-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/ae11a1b751044684ba9193e46944e7af~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765639&x-signature=ns00YYa7R0DzjMfmERTdB2G7r58%3D" alt="中国2025成绩单" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">中国2025成绩单</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 656922 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=中国2025成绩单" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p26-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/637b45d994d44d408d8bfbd08055d1c6~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765643&x-signature=qTFcNzzNN4%2F0RGKb%2BSvIV178xAU%3D" alt="建议三孩每月补贴5000元至3岁" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">建议三孩每月补贴5000元至3岁</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 484530 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=建议三孩每月补贴5000元至3岁" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p26-volcsearch-sign.byteimg.com/tos-cn-i-xv4ileqgde/cdd0a110bf264a18b71b314dd512022e~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765646&x-signature=5rmq5ioE1fjUtoQR8pjoZFMcRTQ%3D" alt="公安机关查处网络谣言" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">公安机关查处网络谣言 辟谣</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 341732 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=公安机关查处网络谣言" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p11-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/bb2405cccf9049f59545674798591e9a~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765650&x-signature=pYQ6KAG%2BA6tTB%2F8P6fpNu6WnMro%3D" alt="奶奶你是一块金子放错了地方" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">奶奶你是一块金子放错了地方</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 341732 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=奶奶你是一块金子放错了地方" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <h2 class="category-title">📌 今日时政热点</h2>
+                <div class="category-count">共 5 条热点</div>
+            </div>
+                <div class="hotspot-card">
+                    <img src="https://p11-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/bcfdd371ad4e44d2b23372efb2fb0e01~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765654&x-signature=7cLt3vDEuuS5%2BIAKsGpA7ldn4cM%3D" alt="十四届全国人大四次会议开幕会举行" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">十四届全国人大四次会议开幕会举行 热</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 1179946 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=十四届全国人大四次会议开幕会举行" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p3-volcsearch-sign.byteimg.com/tos-cn-i-xv4ileqgde/c3d0bc76236ea270e340cc56dd1abc5c~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765657&x-signature=%2F%2BShZyzoPWd0wEgkeCQKYPBhFDY%3D" alt="伊朗首次使用最快自杀式无人机" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">伊朗首次使用最快自杀式无人机</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 355693 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=伊朗首次使用最快自杀式无人机" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p3-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/f93d9e9a1bda46f29b9034a482ceeb2d~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765661&x-signature=0wm5uBmp%2FLpXRBoYA7vRfbgLDio%3D" alt="伊朗袭击以色列国防部大楼" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">伊朗袭击以色列国防部大楼</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 330669 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=伊朗袭击以色列国防部大楼" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p3-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/77e81516f1bc45d0a0dad975eca92924~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765664&x-signature=j1IArosyPrNJ2EnGDhmKLwZRd4A%3D" alt="伊朗高官让特朗普想想美国以谁优先" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">伊朗高官让特朗普想想美国以谁优先</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 150935 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=伊朗高官让特朗普想想美国以谁优先" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p26-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/35d9cd71bc7e4104a2719ba53d65a728~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765668&x-signature=bENxojLOaInJQGuP5dtiNGUKb60%3D" alt="推进祖国统一" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">推进祖国统一</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 98025 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=推进祖国统一" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <h2 class="category-title">🎭 今日文娱热点</h2>
+                <div class="category-count">共 5 条热点</div>
+            </div>
+                <div class="hotspot-card">
+                    <img src="https://p26-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/167f7763e1594866a73bf9cc9c71c69d~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765672&x-signature=YLpmHdlcCZSrKm7W%2BMf5MpsMQgI%3D" alt="张杰演唱会抢票" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">张杰演唱会抢票</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 359838 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=张杰演唱会抢票" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400&h=300&fit=crop" alt="霍启刚希望明年春晚有香港分会场" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">霍启刚希望明年春晚有香港分会场</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 267944 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=霍启刚希望明年春晚有香港分会场" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p3-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/5d694b4def374c7b80b05176593f4305~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765679&x-signature=1%2BfKYM04EgQiiIx6FDsHAOHh4mo%3D" alt="文咏珊出个国帅成啥了" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">文咏珊出个国帅成啥了</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 101616 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=文咏珊出个国帅成啥了" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p3-volcsearch-sign.byteimg.com/tos-cn-i-xv4ileqgde/897fe8f9a4744ba4bf59b80608cff14f~tplv-obj.jpeg?lk3s=1515c32d&scene=volc_search&x-expires=1780469682&x-signature=5I1hsf4QfB%2BzTO8e1%2FSV%2B12nN6o%3D" alt="逐玉" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">逐玉</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 101150 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=逐玉" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p26-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/17fe2324b36f4980a843d712a2ff8faa~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765686&x-signature=kME9Dp79rtukaHMvikD24USck3A%3D" alt="武林外传20年后最大彩蛋" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">武林外传20年后最大彩蛋</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 95436 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=武林外传20年后最大彩蛋" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <h2 class="category-title">🤖 今日AI科技热点</h2>
+                <div class="category-count">共 5 条热点</div>
+            </div>
+                <div class="hotspot-card">
+                    <img src="https://p3-volcsearch-sign.byteimg.com/tos-cn-i-xv4ileqgde/c90b47c4dbc44c9f823d304301cd3205~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765690&x-signature=%2BzQcLOU0POZITTQAGL64eW4Kxz8%3D" alt="华为乾崑896线激光雷达再创巅峰" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">华为乾崑896线激光雷达再创巅峰 重磅</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 484530 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=华为乾崑896线激光雷达再创巅峰" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p11-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/908419ca873e4fc88112250aa4a618af~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765693&x-signature=DJi3pKgwIHX4GEh%2FrOXhYwPB0Ic%3D" alt="中国芯片攻关取得新突破" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">中国芯片攻关取得新突破</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 89799 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=中国芯片攻关取得新突破" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p11-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/d541117ed9ad474eb6d3b4a872aa5afe~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765697&x-signature=M5i6Wph9n7k%2B7yYKwDllS7fSk%2FQ%3D" alt="苹果客服回应iPhone一个月褪色" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">苹果客服回应iPhone一个月褪色</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 微博热搜</div>
+                            <div class="hotspot-views">🔥 84179 热度</div>
+                        </div>
+                        <a href="https://s.weibo.com/weibo?q=苹果客服回应iPhone一个月褪色" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400&h=300&fit=crop" alt="How to add SharedMemory to an Agent and its Tools" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">How to add SharedMemory to an Agent and its Tools</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 Langchain</div>
+                            <div class="hotspot-views">🔥 500000 热度</div>
+                        </div>
+                        <a href="https://python.langchain.com/en/latest/modules/agents/agent_executors/examples/sharedmemory_for_tools.html" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+                <div class="hotspot-card">
+                    <img src="https://p26-volcsearch-sign.byteimg.com/tos-cn-i-xstd03g9pf/f3d6e9b9a9e44df0bfb06295cdcc3fbb~tplv-obj.jpeg?lk3s=7acb411c&scene=volc_search&x-expires=1835765632&x-signature=k%2FBR9eG2fq0afNF99NjWiI4G2hk%3D" alt="Openai Language Model Applications" class="hotspot-image">
+                    <div class="hotspot-content">
+                        <div class="hotspot-title">Openai Language Model Applications</div>
+                        <div class="hotspot-meta">
+                            <div class="hotspot-source">📄 Restack</div>
+                            <div class="hotspot-views">🔥 400000 热度</div>
+                        </div>
+                        <a href="https://www.restack.io/p/artificial-intelligence-applications-answer-openai-language-models" target="_blank" class="hotspot-link">查看详情 →</a>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+        <div class="footer">
+            <p>🍡 <strong>鱼丸小结：</strong>以上为今日分类热点精选，欲了解详情可查看完整报道</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">本内容由AI自动生成，仅供参考</p>
+        </div>
+    </div>
+    <script>
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+        document.getElementById('date-meta').textContent = today.toLocaleDateString('zh-CN', options);
+    </script>
+</body>
+</html>
